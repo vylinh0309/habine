@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ủng hộ Habi 💖</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url('https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/488444891_955550703078184_3244219956958116319_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_ohc=sndOS9KPExoQ7kNvwE6WJDt&_nc_oc=AdnlxjUSOH5AfZuhwgwr01MIjdVHcTeFz05HqWf8bo0rV5kibEJ0WbrORLxODI3mzDg&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD2AHwxhlGmjW1L5btMY4Kt8ifXXvq2SGhd5ahnHWXYG9QgA&oe=681956F1');
+      background-repeat: no-repeat; 
+  background-size: cover;
+    }
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #2e2e2e;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #412203;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #f0d6d6;
+  font-size: 2.5em;
+  filter: drop-shadow(0 0 5px rgb(231, 155, 236));
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+img {
+  border: 2px solid #e91e63;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+  width: 80%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #e91e63;
+  outline: none;
+}
+
+textarea {
+  height: 100px;
+}
+
+button {
+  background-color: #70b5ec;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #d81b60;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+  </style>
+</head>
+<body>
+  <h1>Ném cốc trà sữa vào mồm Habi nhaa 💖</h1>
+  <p>STK: <b>9847370656 - Vietcombank</b></p>
+  <img src="https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/488245369_1149112126913818_4826981947436242485_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=CEiBHrJW9YAQ7kNvwGD8bLB&_nc_oc=AdkFkx0TLFFmlOzOkz6F2XR4hAs_xOP8CJlws7mY2xNtHuF5njHPHKcqJGMLHo1jlUE&_nc_zt=23&_nc_ht=scontent.fhan4-1.fna&oh=03_Q7cD2AFz4LF2OTuVxPdS7oSaCELdYi8VLa26QxDoShmeNSUhmA&oe=68193E35" alt="QR Code" width="200"><br><br>
+
+  <input type="text" id="name" placeholder="Tên bạn"><br>
+  <input type="text" id="amount" placeholder="Số tiền"><br>
+  <textarea id="msg" placeholder="Gửi lời nhắn đến haihonbi..."></textarea><br>
+  <button onclick="send()">Đã chuyển khoản!</button>
+
+  <script>
+    function send() {
+      fetch('/donate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('name').value,
+          amount: document.getElementById('amount').value,
+          msg: document.getElementById('msg').value
+        })
+      }).then(() => {
+        alert('Habi đã re 🥰');
+      });
+    }
+  </script>
+</body>
+</html>

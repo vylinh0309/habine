@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Donate</title>
+  <style>
+    body { background: transparent; color: rgb(0, 0, 0); font-size: 36px; font-family: Arial; text-align: center; padding-top: 100px; }
+    #alert { animation: pop 0.5s ease; display: none; } /* Initially hidden */
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .bold { font-weight: bold; } /* Class for bold text */
+    img { width: 150px; height: auto; margin-left: auto; margin-right: auto; margin-bottom: 10px; } /* Style for the image */
+  </style>
+</head>
+<body>
+  <div id="alert">
+    <img id="donateImage" src="" alt="Donation Image" style="display: none;"> <!-- Image placeholder -->
+    <div id="donateText">Chưa có donate nào</div>
+  </div>
+
+  <script>
+    let lastId = 0;
+    async function fetchDonate() {
+      const res = await fetch('/latest');
+      const data = await res.json();
+      if (data && data.id !== lastId) {
+        lastId = data.id;
+        const alertDiv = document.getElementById('alert');
+        const donateImage = document.getElementById('donateImage');
+        const donateText = document.getElementById('donateText');
+
+        // Set the image source (replace 'image_url_here' with the actual image URL)
+        donateImage.src = data.imageUrl || 'https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/486808287_1772234556657137_3855811110185612408_n.png?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_ohc=bRvSdgm4keQQ7kNvwF4JYu0&_nc_oc=AdmG6s_NJUfIM0SRqfYkptC5gCpD3j9hdKBrSlujfeHsoLAA_OuVlX_BaGPmn0cWa9E&_nc_zt=23&_nc_ht=scontent.fhan3-5.fna&oh=03_Q7cD2AHWUegAjt4f_joUWD-ma57bqtURH9TdvM-wM5sPIPEI7w&oe=68193C23'; // Assuming data.imageUrl contains the image URL
+        donateImage.style.display = 'block'; // Show the image
+
+        // Update the text with "nghìn đồng"
+        donateText.innerHTML = `<span class="bold">${data.name} đã làm Habi re chỉ bằng ${data.amount} nghìn đồng 💖</span><br>"${data.msg}"`;
+        
+        alertDiv.style.display = 'block'; // Show the alert
+
+        // Reset the alert after 10 seconds
+        setTimeout(() => {
+          alertDiv.style.display = 'none'; // Hide the alert
+        }, 10000); // 10000 milliseconds = 10 seconds
+      }
+    }
+    setInterval(fetchDonate, 3000);
+  </script>
+</body>
+</html>
